@@ -3,7 +3,7 @@ class ClanekKontroler extends Kontroler
 {
     public function zpracuj($parametry)
     {
-       // Vytvoření instance modelu, který nám umožní pracovat s články
+        
     $spravceClanku = new SpravceClanku();
 
     $spravceUzivatelu = new SpravceUzivatelu();

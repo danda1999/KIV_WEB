@@ -3,7 +3,6 @@ class RegistraceKontroler extends Kontroler
 {
     public function zpracuj($parametry)
     {
-        // Hlavička stránky
         $this->hlavicka['titulek'] = 'Registrace';
         if ($_POST)
         {
@@ -20,7 +19,7 @@ class RegistraceKontroler extends Kontroler
                 $this->pridejZpravu($chyba->getMessage());
             }
         }
-        // Nastavení šablony
+        
         $this->pohled = 'registrace';
     }
 }

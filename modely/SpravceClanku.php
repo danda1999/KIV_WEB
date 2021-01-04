@@ -1,7 +1,6 @@
 <?php
 class SpravceClanku
 {
-    // Vrátí článek z databáze podle jeho URL
     public function vratClanek($url)
     {
         return Db::dotazJeden('
@@ -11,7 +10,6 @@ class SpravceClanku
         ', array($url));
     }
 
-    // Vrátí seznam článků v databázi
     public function vratClankyPublikovane()
     {
         return Db::dotazVsechny('

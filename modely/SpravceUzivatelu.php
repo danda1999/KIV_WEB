@@ -40,13 +40,11 @@ class SpravceUzivatelu
         $_SESSION['uzivatel'] = $uzivatel;
     }
 
-    // Odhlásí uživatele
     public function odhlas()
     {
         unset($_SESSION['uzivatel']);
     }
 
-    // Vrátí aktuálně přihlášeného uživatele
     public function vratUzivatele()
     {
         if (isset($_SESSION['uzivatel']))
