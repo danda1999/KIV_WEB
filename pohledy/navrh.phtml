@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="cs-cz">
+  <head>
+    <title><?= $titulek ?></title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <div class="container">
+        <div class="row">
+            <div class="col-xs-12 col-md-12">
+                <div class="text-center">Můj první web</div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-xs-12 col-md-12">
+                <?php foreach ($zpravy as $zprava) : ?>
+                    <p class="zprava"><?= $zprava ?></p>
+                <?php endforeach ?>
+            </div>
+        </div>
+        <div class="row text-center">
+            <div class="col-xs-12 col-md-12">
+                <div class='card'><?php $this->kontroler->vypisPohled(); ?></div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-xs-12 col-md-4">
+                <div class='card'>sekce1</div>
+            </div>
+            <div class="col-md-4">
+                <div class='card'>sekce2</div>
+            </div>
+            <div class="col-md-4">
+                <div class='card'>sekce3</div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-xs-12 col-md-4">
+                <div class='card'>
+                    <a href=<?=$_SESSION['home_page'];?>>Administrace</a>
+            </div>
+            </div>
+        </div>
+    </div>
+<script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js" integrity="sha384-ChfqqxuZUCnJSK3+MXmPNIyE6ZbWh2IMqE241rYiqJxyMiZ6OW/JmZQ5stwEULTy" crossorigin="anonymous"></script>
+</body>
+</html>
