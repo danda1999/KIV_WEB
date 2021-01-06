@@ -17,10 +17,9 @@ class SpravceUzivatelu
             throw new ChybaUzivatele('Heslo nesouhlasí.');
         }
 
-        $uzivatel = array('Login' => $login, 'Jmeno' => $jmeno, 'Prijmeni' => $prijmeni, 'Email' => $email, 'heslo' => $this->vratOtisk($heslo));
         try
         {
-            DB::vloz('uzivatel', $uzivatel);
+            DB::vlozUzivatele($login, $jmeno, $prijmeni, $email, $this->vratOtisk($heslo));
         }
         catch (PDOException $chyba)
         {
@@ -31,13 +30,18 @@ class SpravceUzivatelu
     public function prihlas($login, $heslo)
     {
         $uzivatel = Db::dotazJeden('
-            SELECT ID_Uzivatele, Login, admin, heslo
+            SELECT login, admin, heslo, recenzent
             FROM uzivatel
-            WHERE Login = ?
+            WHERE login = ?
         ', array($login));
         if (!$uzivatel || !password_verify($heslo, $uzivatel['heslo']))
+        {
             throw new ChybaUzivatele('Neplatné jméno nebo heslo.');
-        $_SESSION['uzivatel'] = $uzivatel;
+        }
+        else
+        {
+            $_SESSION['uzivatel'] = $uzivatel;
+        }
     }
 
     public function odhlas()

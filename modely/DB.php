@@ -44,12 +44,27 @@ class DB
         return $navrat->rowCount();
     }
 
-    public static function vloz($tabulka, $parametry = array())
+    public static function vlozUzivatele($login, $jmeno, $prijmeni, $email, $heslo)
     {
-        return self::dotaz("INSERT INTO `$tabulka` (`".
-            implode('`, `', array_keys($parametry)).
-            "`) VALUES (".str_repeat('?,', sizeOf($parametry)-1)."?)",
-                array_values($parametry));
+        $sql = "INSERT INTO uzivatel (login, jmeno, prijmeni, email, heslo) VALUES (?, ?, ?, ?, ?)";
+        $navrat = self::$spojeni->prepare($sql);
+        $navrat->execute([$login, $jmeno, $prijmeni, $email, $heslo]);
+        return $navrat->rowCount();
+    }
+
+    public static function vlozClanek($titulek, $obsah, $url, $popisek, $klicova_slova)
+    {
+        $sql = "INSERT INTO clanky (titulek, obsah, url, popisek, klicova_slova) VALUES (?, ?, ?, ?, ?)";
+        $navrat = self::$spojeni->prepare($sql);
+        $navrat->execute([$titulek, $obsah, $url, $popisek, $klicova_slova]);
+        return $navrat->rowCount();
+    }
+    public static function vlozRecenzi($titulek, $hodnoceni)
+    {
+        $sql = "INSERT INTO recenze (titulek, hodnoceni, autor, datum) VALUES (?,?, ?, ?)";
+        $navrat= self::$spojeni->prepare($sql);
+        $navrat->execute([$titulek, $hodnoceni, $_SESSION['uzivatel']['login'], date("Y-m-d")]);
+        return $navrat->rowCount();
     }
 
     public static function zmen($tabulka, $hodnoty = array(), $podminka, $parametry = array())
@@ -60,9 +75,19 @@ class DB
             array_merge(array_values($hodnoty), $parametry));
     }
 
-    public static function getLastId()
+    public static function recenzeClanek($titulek)
     {
-        return self::$spojeni->lastInsertId();
+        $sql = "SELECT titulek, hodnoceni, autor, datum FROM recenze WHERE titulek = ?";
+        $navrat = self::$spojeni->prepare($sql);
+        $navrat->execute([$titulek]);
+        return $navrat->fetchAll();
+    }
+    public static function recenze()
+    {
+        $sql = "SELECT titulek, hodnoceni, autor, datum FROM recenze ORDER BY `datum` DESC";
+        $navrat = self::$spojeni->prepare($sql);
+        $navrat->execute([]);
+        return $navrat->fetchAll();
     }
 }
 ?>

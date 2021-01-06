@@ -1,0 +1,9 @@
+<h1>Recenze clanki</h1>
+
+<form method="post">
+    Titulek<br />
+    <input type="text" class="text-center" name="titulek" value="<?= $recenze['titulek'] ?>" readonly/><br /><br>
+    Hodnoceni<br><br>
+    <input type="number" name="hodnoceni" min="1" max="10"/><br><br> 
+    <input type="submit" value="Uložit článek" />
+</form>

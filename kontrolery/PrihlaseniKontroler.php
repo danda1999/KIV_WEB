@@ -7,7 +7,14 @@ class PrihlaseniKontroler extends Kontroler
 
         if($SpravceUzivatelu->vratUzivatele())
         {
-            $this->presmeruj('administrace');
+            if($_SESSION['uzivatel']['admin'])
+            {
+                $this->presmeruj('administraceadmin');
+            }
+            else
+            {
+                $this->presmeruj('administrace');
+            }
         }
 
         $this->hlavicka['titulek'] = 'Přihlášení';
@@ -17,7 +24,18 @@ class PrihlaseniKontroler extends Kontroler
             {
                 $SpravceUzivatelu->prihlas($_POST['Login'], $_POST['heslo']);
                 $this->pridejZpravu('Byl jste úspěšně přihlášen.');
-                $this->presmeruj('administrace');
+                if($_SESSION['uzivatel']['admin'])
+                {
+                    $this->presmeruj('administraceadmin');
+                }
+                else if($_SESSION['uzivatel']['recenzent'])
+                {
+                    $this->presmeruj('administraceadmin');
+                }
+                else
+                {
+                    $this->presmeruj('administrace');
+                }
             }
             catch(ChybaUzivatele $chyba)
             {

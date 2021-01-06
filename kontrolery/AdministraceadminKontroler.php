@@ -1,5 +1,5 @@
 <?php
-class AdministraceKontroler extends Kontroler
+class AdministraceadminKontroler extends Kontroler
 {
     public function zpracuj($parametry)
     {
@@ -16,7 +16,7 @@ class AdministraceKontroler extends Kontroler
         $this->data['login'] = $uzivatel['login'];
         $this->data['admin'] = $uzivatel['admin'];
 
-        $this->pohled = 'administrace';
+        $this->pohled = 'administraceadmin';
     }
 }
 ?>

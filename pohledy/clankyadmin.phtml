@@ -2,15 +2,20 @@
 <table class="table table-striped">
 <?php foreach ($clanky as $clanek) : ?>
     <tr>
+        <th>Článek</th><th>publikovaný/nepublikovaný</th>
+    </tr>
         <td>
-            <h2><a href="clanek/<?= $clanek['url'] ?>"><?= $clanek['titulek'] ?></a></h2>
+            <h2><a href="clanek/<?= $clanek['url'] ?>"><?=$clanek['titulek'] ?></a></h2>
             <?= $clanek['popisek'] ?>
-            <?php if ($admin) : ?>
-                <br />
-                <a href="editor/<?= $clanek['url'] ?>">Editovat</a>
-                <a href="clanek/<?= $clanek['url'] ?>/odstranit">Odstranit</a>
-                <a href="clanek/<?= $clanek['url'] ?>/publikuj">publikuj</a>
-            <?php endif ?>
+            <br />
+            
+            <a class="odsazeni" href="editor/<?= $clanek['url'] ?>">Editovat</a>
+            <a class="odsazeni" href="clanek/<?= $clanek['url'] ?>/odstranit">Odstranit</a>
+            <a class="odsazeni" href="clanek/<?= $clanek['url'] ?>/publikuj">publikuj</a>
+        </td>
+        <td style="padding-top:50px;">
+            <?php if($clanek) {echo("publikovano"); ?>
+            <?php } else{ echo("nepublikovano");} ?>
         </td>
     </tr>
 <?php endforeach ?>

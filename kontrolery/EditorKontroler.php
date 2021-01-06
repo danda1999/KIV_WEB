@@ -18,12 +18,16 @@ class EditorKontroler extends Kontroler
 
         if ($_POST)
         {
-            $klice = array('titulek', 'obsah', 'url', 'popisek', 'klicova_slova');
-            $clanek = array_intersect_key($_POST, array_flip($klice));
+            $clanek_id = $_POST['clanky_id'];
+            $titulek = $_POST['titulek'];
+            $obsah = $_POST['obsah'];
+            $url = $_POST['url'];
+            $popisek = $_POST['popisek'];
+            $klicova_slova = $_POST['klicova_slova'];
 
-            $spravceClanku->ulozClanek($_POST['clanky_id'], $clanek);
+            $spravceClanku->ulozClanek($clanek_id,$titulek, $obsah, $url, $popisek,$klicova_slova);
             $this->pridejZpravu('Článek byl úspěšně uložen.');
-            $this->presmeruj('clanek/' . $clanek['url']);
+            $this->presmeruj('clanek');
         }
         else if (!empty($parametry[0]))
         {
