@@ -25,17 +25,24 @@ class EditorKontroler extends Kontroler
             $popisek = $_POST['popisek'];
             $klicova_slova = $_POST['klicova_slova'];
 
-            $spravceClanku->ulozClanek($clanek_id,$titulek, $obsah, $url, $popisek,$klicova_slova);
-            $this->pridejZpravu('Článek byl úspěšně uložen.');
-            $this->presmeruj('clanek');
+
+
+            $soubor_cesta = "clankypdf/";
+
+            $soubor_cesta = $soubor_cesta . basename( $_FILES['soubor']['name']);
+
+
+            $spravceClanku->ulozClanek($clanek_id,$titulek, $obsah, $url, $popisek,$klicova_slova, $targetfolder);
+            $this->smeruj('clanek');
         }
         else if (!empty($parametry[0]))
         {
             $nactenyClanek = $spravceClanku->vratClanek($parametry[0]);
             if ($nactenyClanek)
+            {
                 $clanek = $nactenyClanek;
-            else
-                $this->pridejZpravu('Článek nebyl nalezen');
+            }
+            
         }
 
         $this->data['clanek'] = $clanek;

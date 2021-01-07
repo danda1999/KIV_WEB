@@ -12,11 +12,15 @@ class EditorecenzeKontroler extends Kontroler
         if($_POST)
         {
             $titulek = $_POST['titulek'];
+            
+            $url = $_POST['url'];
+            $zajimavost = $_POST['zajimavost'];
+            $pravdivost = $_POST['pravdivost'];
+            $gramatika = $_POST['gramatika'];
             $hodnoceni = $_POST['hodnoceni'];
 
-            $spravceClanku->ulozRecenzi($titulek, $hodnoceni);
-            $this->pridejZpravu('Recenze byla uložena');
-            $this->presmeruj('clanek');
+            $spravceClanku->ulozRecenzi($titulek, $url, $zajimavost, $pravdivost, $gramatika, $hodnoceni);
+            $this->smeruj('clanek');
         }
         else if (!empty($parametry[0]))
         {
@@ -24,10 +28,6 @@ class EditorecenzeKontroler extends Kontroler
             if($nactenyClanek)
             {
                 $recenze = $nactenyClanek;
-            }
-            else
-            {
-                $this->pridejZpravu('Článek pro recenzi nebyl nalezen');
             }
         }
 

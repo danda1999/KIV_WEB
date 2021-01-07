@@ -13,20 +13,19 @@ class RecenzeKontroler extends Kontroler
         {
             $this->overUzivatele(true);
             $spravceClanku->publikuj($parametry[0]);
-            $this->presmeruj('clanek');
+            $this->smeruj('clanek');
         }
         if (!empty($parametry[0]))
         {
             $recenze = $spravceClanku->recenezClanku($parametry[0]);
             if(!$recenze)
             {
-                $this->presmeruj('chyba');
+                $this->smeruj('chyba');
             }
 
             $this->hlavicka = array('titulek' => $parametry[0],'klicova_slova' => $parametry[0],'popis' => $parametry[0]);
 
             $this->data['recenze'] = $recenze;
-            $GLOBALS['titulek'] = $parametry[0];
             $this->pohled = 'recenzetitulek';
             
         }

@@ -55,5 +55,15 @@ class SpravceUzivatelu
             return $_SESSION['uzivatel'];
         return null;
     }
+
+    public function odeberUzivatele($id)
+    {
+        DB::smazUzivatele($id);
+    }
+
+    public function uzivatele()
+    {
+        return DB::vratUzivateleSeznam($_SESSION['uzivatel']['login']);
+    }
 }
 ?>

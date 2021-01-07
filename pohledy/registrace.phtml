@@ -1,19 +1,19 @@
 <h1>Registrace</h1>
 
 <form method="post">
-    Login<br />
-    <input type="text" name="login" /><br />
-    Jméno<br />
-    <input type="text" name="jmeno" /><br />
-    Příjmení<br />
-    <input type="text" name="prijmeni" /><br />
-    E-mail<br />
-    <input type="email" name="email" /><br />
-    Heslo<br />
-    <input type="password" name="heslo" /><br />
-    Heslo znovu<br />
-    <input type="password" name="heslo_znovu" /><br />
-    Aktuální rok<br />
-    <input type="number" name="rok"/><br />
+    <label for="Login">Login:</label><br>
+    <input type="text" id="Login" name="login" class="col-auto" required/><br />
+    <label for="Jmeno">Jméno:</label><br>
+    <input type="text" id="Jmeno" name="jmeno"class="col-auto" required /><br />
+    <label for="Prijmeni">Příjmení:</label><br>
+    <input type="text" id="Prijmeni" name="prijmeni" class="col-auto" required/><br />
+    <label for="Email">Email:</label><br>
+    <input type="email" id="Email" name="email" class="col-auto" required/><br />
+    <label for="Heslo">Heslo:</label><br>
+    <input type="password" id="Heslo" name="heslo" class="col-auto" required/><br />
+    <label for="Heslo2">Heslo znovu:</label><br>
+    <input type="password" id="Heslo2" name="heslo_znovu" class="col-auto" required/><br />
+    <label for="Rok">Rok:</label><br>
+    <input type="number" id="Rok" name="rok" class="col-auto" required/><br />
     <input type="submit" value="Registrovat" />
 </form>

@@ -1,5 +1,8 @@
 .odsazeni {
-    padding: 15px;
+    padding: 20px;
+}
+.odsazeniautor {
+    padding: 10px;
 }
 a {
     text-decoration: none!important;
@@ -15,4 +18,12 @@ main
 }
 .picture{
     padding-right: 10px;
+}
+
+.link{
+    color: blue;
+}
+.footerlink
+{
+    color:red;
 }

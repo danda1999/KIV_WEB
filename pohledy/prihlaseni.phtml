@@ -1,12 +1,13 @@
 <h1>Přihlášení do administrace</h1>
 
 <form method="post">
-    Login<br />
-    <input type="text" name="Login" class="col-auto"/><br />
-    Heslo<br />
-    <input type="password" name="heslo" class="col-auto"/><br />
+    <label for="Login">Login:</label><br>
+    <input type="text" id="Login" name="Login" class="col-auto" required/><br />
+    <label for="Heslo">Heslo:</label><br>
+    <input type="password" id="Heslo" name="heslo" class="col-auto" required/><br />
     </br>
     <input type="submit" value="Přihlásit" class="btn btn-primary"/>
 </form>
+<br>
 
-<p>Pokud ještě nemáte účet, <a href="registrace">zaregistrujte se</a>.</p>
+<p style="padding-bottom:30px;">Pokud ještě nemáte účet, <a href="registrace" class="link">zaregistrujte se</a>.</p>

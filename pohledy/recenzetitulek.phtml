@@ -1,26 +1,38 @@
 <?php foreach ($recenze as $hodnoceni) : ?>
 <h1>Seznam recenzí <?= $hodnoceni['titulek'] ?></h1>
 <?php endforeach ?>
-<table class="table table-striped">
-    <tr>
-        <th>titulek</th><th>hodnoce</th><th>autor</th><th>datum</th>
-    </tr>
-    <?php foreach ($recenze as $hodnoceni) : ?>
-    <tr>
-        <td>
-            <?= $hodnoceni['titulek'] ?>
-        </td>
-        <td>
-            <?= $hodnoceni['hodnoceni'] ?>
-        </td>
-        <td>
-            <?= $hodnoceni['autor'] ?>
-        </td>
-        <td>
-            <?= $hodnoceni['datum'] ?>
-        </td>
-    </tr>
-<?php endforeach ?>
-</table>
+<div class="table-responsive-md">
+    <table class="table table-striped">
+        <tr>
+            <th>titulek</th><th>hodnocení_celkové</th><th>hodnocení_zajímavost</th><th>hodnocení_pravdivost</th>
+            <th>hodnocení_gramatika</th><th>autor</th><th>datum</th>
+        </tr>
+        <?php foreach ($recenze as $hodnoceni) : ?>
+        <tr>
+            <td>
+                <?= $hodnoceni['titulek'] ?>
+            </td>
+            <td>
+                <?= $hodnoceni['hodnoceni'] ?>
+            </td>
+            <td>
+                <?= $hodnoceni['hodnoceni_zajimavost'] ?>
+            </td>
+            <td>
+                <?= $hodnoceni['hodnoceni_pravdivost'] ?>
+            </td>
+            <td>
+                <?= $hodnoceni['hodnoceni_gramatika'] ?>
+            </td>
+            <td>
+                <?= $hodnoceni['autor'] ?>
+            </td>
+            <td>
+                <?= $hodnoceni['datum'] ?>
+            </td>
+        </tr>
+    <?php endforeach ?>
+    </table>
+</div>
 
-<a href="recenze/<?= $hodnoceni['titulek'] ?>/publikuj"><button type="button" class="btn btn-primary">Publikuj</button></a>
+<a href="recenze/<?= $hodnoceni['url'] ?>/publikuj"><button type="button" class="btn btn-primary">Publikuj</button></a>

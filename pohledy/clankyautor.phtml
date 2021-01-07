@@ -1,17 +1,17 @@
 <h1>Seznam článků</h1>
 <div class="table-responsive-md">
     <table class="table table-striped">
+    <?php foreach ($clanky as $clanek) : ?>
         <tr>
             <th>Článek</th><th>publikovaný/nepublikovaný</th>
         </tr>
-        <?php foreach ($clanky as $clanek) : ?>
-        <tr>
             <td>
                 <h2><a href="clanek/<?= $clanek['url'] ?>"><?=$clanek['titulek'] ?></a></h2>
-                <p><?= $clanek['popisek'] ?></p>
+                <?= $clanek['popisek'] ?>
+                <br /><br>
                 
-                <p><a class="odsazeni" href="editor/<?= $clanek['url'] ?>"><button type="button" class="btn btn-primary">Editor</button></a>
-                <a class="odsazeni" href="clanek/<?= $clanek['url'] ?>/odstranit"><button type="button" class="btn btn-primary">Odstranit</button></a></p>
+                <a class="odsazeniautor" href="editor/<?= $clanek['url'] ?>">Editovat</a>
+                <a class="odsazeniautor" href="clanek/<?= $clanek['url'] ?>/odstranit">Odstranit</a>
             </td>
             <td style="padding-top:50px;">
                 <?php if($clanek['publikovani']) {echo("publikovano"); ?>

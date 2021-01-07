@@ -1,6 +1,6 @@
 <h1>Editor článků</h1>
 
-<form method="post">
+<form method="post" enctype="multipart/form-data">
     <input type="hidden" name="clanky_id" value="<?= $clanek['clanky_id'] ?>" />
     Titulek<br />
     <input type="text" name="titulek" value="<?= $clanek['titulek'] ?>" /><br />
@@ -10,22 +10,14 @@
     <input type="text" name="popisek" value="<?= $clanek['popisek'] ?>" /><br />
     Klíčová slova<br />
     <input type="text" name="klicova_slova" value="<?= $clanek['klicova_slova'] ?>" /><br />
+    Soubor pdf <br>
+    <input type="file" accept=".pdf" name="soubor" id="soubor"><br>
     Obsah
-    <textarea name="obsah"><?= $clanek['obsah'] ?></textarea>
-    <input type="submit" value="Uložit článek" />
+    <textarea name="obsah"><?= $clanek['obsah'] ?></textarea><br>
+    <input type="submit" value="Uložit článek" name="submit" />
 </form>
 
-<script type="text/javascript" src="//tinymce.cachefly.net/4.0/tinymce.min.js"></script>
-<script type="text/javascript">
-    tinymce.init({
-            selector: "textarea[name=obsah]",
-            plugins: [
-                    "advlist autolink lists link image charmap print preview anchor",
-                    "searchreplace visualblocks code fullscreen",
-                    "insertdatetime media table contextmenu paste"
-            ],
-            toolbar: "insertfile undo redo | styleselect | bold italic | alignleft aligncenter alignright alignjustify | bullist numlist outdent indent | link image",
-            entities: "160,nbsp",
-            entity_encoding: "named",
-    });
+<script src="https://cdn.ckeditor.com/ckeditor5/24.0.0/decoupled-document/ckeditor.js"></script>
+<script>
+   CKEDITOR.replace('obsah');
 </script>

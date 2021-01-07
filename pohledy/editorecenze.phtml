@@ -1,9 +1,17 @@
-<h1>Recenze clanki</h1>
+<h1>Recenze Článku</h1>
 
 <form method="post">
     Titulek<br />
     <input type="text" class="text-center" name="titulek" value="<?= $recenze['titulek'] ?>" readonly/><br /><br>
+    URL<br />
+    <input type="text" class="text-center" name="url" value="<?= $recenze['url'] ?>" readonly/><br /><br>
+    Hodnoceni_zajímavosti<br><br>
+    <input type="number" name="zajimavost" min="1" max="10"/><br><br>
+    Hodnoceni_pravdivost<br><br>
+    <input type="number" name="pravdivost" min="1" max="10"/><br><br>
+    Hodnoceni_gramatika<br><br>
+    <input type="number" name="gramatika" min="1" max="10"/><br><br>
     Hodnoceni<br><br>
-    <input type="number" name="hodnoceni" min="1" max="10"/><br><br> 
-    <input type="submit" value="Uložit článek" />
+    <input type="number" name="hodnoceni" min="1" max="10"/><br><br>
+    <input type="submit" value="Uložit recenzi" />
 </form>

@@ -10,7 +10,7 @@ class AdministraceadminKontroler extends Kontroler
         if((!empty($parametry[0]))&& ($parametry[0] = 'odhlasit'))
         {
             $spravceUzivatelu->odhlas();
-            $this->presmeruj('prihlaseni');
+            $this->smeruj('prihlaseni');
         }
         $uzivatel = $spravceUzivatelu->vratUzivatele();
         $this->data['login'] = $uzivatel['login'];

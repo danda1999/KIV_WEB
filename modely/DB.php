@@ -52,18 +52,18 @@ class DB
         return $navrat->rowCount();
     }
 
-    public static function vlozClanek($titulek, $obsah, $url, $popisek, $klicova_slova)
+    public static function vlozClanek($titulek, $obsah, $url, $popisek, $klicova_slova, $targetfolder)
     {
-        $sql = "INSERT INTO clanky (titulek, obsah, url, popisek, klicova_slova) VALUES (?, ?, ?, ?, ?)";
+        $sql = "INSERT INTO clanky (titulek, obsah, url, popisek, klicova_slova, soubor_cesta, autor) VALUES (?, ?, ?, ?, ?, ?, ?)";
         $navrat = self::$spojeni->prepare($sql);
-        $navrat->execute([$titulek, $obsah, $url, $popisek, $klicova_slova]);
+        $navrat->execute([$titulek, $obsah, $url, $popisek, $klicova_slova, $targetfolder, $_SESSION['uzivatel']['login']]);
         return $navrat->rowCount();
     }
-    public static function vlozRecenzi($titulek, $hodnoceni)
+    public static function vlozRecenzi($titulek, $url, $zajimavost, $pravdivost, $gramatika, $hodnoceni)
     {
-        $sql = "INSERT INTO recenze (titulek, hodnoceni, autor, datum) VALUES (?,?, ?, ?)";
+        $sql = "INSERT INTO recenze (titulek, url, hodnoceni_zajimavost, hodnoceni_pravdivost, hodnoceni_gramatika, hodnoceni, autor, datum) VALUES (?, ?, ?, ?, ?, ?, ?, ?)";
         $navrat= self::$spojeni->prepare($sql);
-        $navrat->execute([$titulek, $hodnoceni, $_SESSION['uzivatel']['login'], date("Y-m-d")]);
+        $navrat->execute([$titulek, $url, $zajimavost, $pravdivost, $gramatika, $hodnoceni, $_SESSION['uzivatel']['login'], date("Y-m-d")]);
         return $navrat->rowCount();
     }
 
@@ -75,18 +75,42 @@ class DB
             array_merge(array_values($hodnoty), $parametry));
     }
 
-    public static function recenzeClanek($titulek)
+    public static function recenzeClanek($url)
     {
-        $sql = "SELECT titulek, hodnoceni, autor, datum FROM recenze WHERE titulek = ?";
+        $sql = "SELECT titulek, url, hodnoceni, hodnoceni_zajimavost, hodnoceni_pravdivost, hodnoceni_gramatika, autor, datum FROM recenze WHERE url = ?";
         $navrat = self::$spojeni->prepare($sql);
-        $navrat->execute([$titulek]);
+        $navrat->execute([$url]);
         return $navrat->fetchAll();
     }
     public static function recenze()
     {
-        $sql = "SELECT titulek, hodnoceni, autor, datum FROM recenze ORDER BY `datum` DESC";
+        $sql = "SELECT titulek, url, hodnoceni, autor, datum FROM recenze ORDER BY `datum` DESC";
         $navrat = self::$spojeni->prepare($sql);
         $navrat->execute([]);
+        return $navrat->fetchAll();
+    }
+
+    public static function clankyAutor()
+    {
+        $sql = "SELECT clanky_id, titulek, url, popisek, publikovani FROM clanky WHERE autor = ?";
+        $navrat = self::$spojeni->prepare($sql);
+        $navrat->execute([$_SESSION['uzivatel']['login']]);
+        return $navrat->fetchAll();
+    }
+
+    public static function smazUzivatele($id)
+    {
+        $sql = "DELETE FROM uzivatel WHERE uzivatel_id = ?";
+        $navrat = self::$spojeni->prepare($sql);
+        $navrat->execute([$id]);
+        return $navrat->rowCount();
+    }
+
+    public static function vratUzivateleSeznam($login)
+    {
+        $sql = "SELECT uzivatel_id, login, jmeno, prijmeni, email, admin, recenzent FROM uzivatel WHERE NOT login = ? ORDER BY uzivatel_id DESC";
+        $navrat = self::$spojeni->prepare($sql);
+        $navrat->execute([$login]);
         return $navrat->fetchAll();
     }
 }

@@ -1,22 +1,21 @@
 <?php
-class AdministraceKontroler extends Kontroler
+class AdministracerecenzentKontroler extends Kontroler
 {
     public function zpracuj($parametry)
     {
-        $this->overUzivatele();
         $this->hlavicka['titulek'] = 'Administrace';
 
         $spravceUzivatelu = new SpravceUzivatelu();
         if((!empty($parametry[0]))&& ($parametry[0] = 'odhlasit'))
         {
             $spravceUzivatelu->odhlas();
-            $this->meruj('prihlaseni');
+            $this->smeruj('prihlaseni');
         }
         $uzivatel = $spravceUzivatelu->vratUzivatele();
         $this->data['login'] = $uzivatel['login'];
-        $this->data['admin'] = $uzivatel['admin'];
+        $this->data['recenzent'] = $uzivatel['recenzent'];
 
-        $this->pohled = 'administrace';
+        $this->pohled = 'administracerecenzent';
     }
 }
 ?>

@@ -7,24 +7,24 @@
 
         abstract function zpracuj($parametry);
 
-        public function vypisPohled()
+        public function pohled()
         {
             if($this->pohled)
             {
-                extract($this->osetri($this->data));
+                extract($this->xss($this->data));
                 extract($this->data, EXTR_PREFIX_ALL, "");
                 require("pohledy/" . $this->pohled . ".phtml");
             }
         }
 
-        public function presmeruj($url)
+        public function smeruj($url)
         {
             header("Location: /$url");
             header("Connection: close");
             exit;
         }
 
-        private function osetri($x = null)
+        private function xss($x = null)
         {
             if(!isset($x))
             {
@@ -38,7 +38,7 @@
             {
                 foreach($x as $k => $v)
                 {
-                    $x[$k] = $this->osetri($v);
+                    $x[$k] = $this->xss($v);
                 }
                 return $x;
             }
@@ -48,40 +48,13 @@
             }
         }
 
-        public function pridejZpravu($zprava)
-        {
-            if(isset($_SESSION['zpravy']))
-            {
-                $_SESSION['zpravy'][] = $zprava;
-            }
-            else
-            {
-                $_SESSION['zpravy'] = array($zprava);
-            }
-        }
-
-        public function vratZpravy()
-        {
-            if(isset($_SESSION['zpravy']))
-            {
-                $zpravy = $_SESSION['zpravy'];
-                unset($_SESSION['zpravy']);
-                return $zpravy;
-            }
-            else
-            {
-                return array();
-            }
-        }
-
-        public function overUzivatele($admin = false)
+        public function overUzivatele($admin = false, $recenzent = false)
         {
             $spravceUzivatelu = new SpravceUzivatelu();
             $uzivatel = $spravceUzivatelu->vratUzivatele();
             if (!$uzivatel || ($admin && !$uzivatel['admin']))
             {
-                $this->pridejZpravu('Nedostatečná oprávnění.');
-                $this->presmeruj('prihlaseni');
+                $this->smeruj('prihlaseni');
             }
         }
     }

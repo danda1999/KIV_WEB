@@ -9,11 +9,11 @@ class PrihlaseniKontroler extends Kontroler
         {
             if($_SESSION['uzivatel']['admin'])
             {
-                $this->presmeruj('administraceadmin');
+                $this->smeruj('administraceadmin');
             }
             else
             {
-                $this->presmeruj('administrace');
+                $this->smeruj('administrace');
             }
         }
 
@@ -23,23 +23,22 @@ class PrihlaseniKontroler extends Kontroler
             try
             {
                 $SpravceUzivatelu->prihlas($_POST['Login'], $_POST['heslo']);
-                $this->pridejZpravu('Byl jste úspěšně přihlášen.');
                 if($_SESSION['uzivatel']['admin'])
                 {
-                    $this->presmeruj('administraceadmin');
+                    $this->smeruj('administraceadmin');
                 }
                 else if($_SESSION['uzivatel']['recenzent'])
                 {
-                    $this->presmeruj('administraceadmin');
+                    $this->smeruj('administracerecenzent');
                 }
                 else
                 {
-                    $this->presmeruj('administrace');
+                    $this->smeruj('administrace');
                 }
             }
             catch(ChybaUzivatele $chyba)
             {
-                $this->pridejZpravu($chyba->getMessage());
+                $this->smeruj('prihlaseni');
             }
 
         }

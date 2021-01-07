@@ -29,7 +29,7 @@ class SmerovacKontroler extends Kontroler
                 //$path -> cesta index.php ... /uvod
                 //$query -> bere to za ? vse 
                 //$queryParam['path']  . .. ['url']
-                //$queryParamFromLeft  . .. [0]   [1]
+                //$queryParamFromLeft  . .. [0]   [1] [2]
             }
         }
         $path = $rawUrl['path'];
@@ -37,7 +37,7 @@ class SmerovacKontroler extends Kontroler
         //HEzke url
         if(empty($naparsovanaURL[0]))
         {
-            $this->presmeruj('uvod');
+            $this->smeruj('uvod');
         }
         $tridaKontroleru = $this->notace(array_shift($naparsovanaURL)) . 'Kontroler';
 
@@ -62,11 +62,11 @@ class SmerovacKontroler extends Kontroler
                 }
                 else
                 {
-                    $this->presmeruj('uvod');
+                    $this->smeruj('uvod');
                 }
             }
             else{
-                $this->presmeruj('chyba');
+                $this->smeruj('chyba');
             }
         }
         $this->kontroler->zpracuj($naparsovanaURL);
@@ -75,14 +75,13 @@ class SmerovacKontroler extends Kontroler
         $this->data['titulek'] = $this->kontroler->hlavicka['titulek'];
         $this->data['popis'] = $this->kontroler->hlavicka['popis'];
         $this->data['klicova_slova'] = $this->kontroler->hlavicka['klicova_slova'];
-        $this->data['zpravy'] = $this->vratZpravy();
         if(isset($_SESSION['uzivatel'])&&($_SESSION['uzivatel']['admin']))
         {
             $this->pohled = 'navrhadmin';
         }
         else if(isset($_SESSION['uzivatel'])&&($_SESSION['uzivatel']['recenzent']))
         {
-            $this->pohled = 'navrhadmin';
+            $this->pohled = 'navrhrecenzent';
         }
         else if((isset($_SESSION['uzivatel']))&&(!$_SESSION['uzivatel']['recenzent'])&&(!$_SESSION['uzivatel']['admin']))
         {

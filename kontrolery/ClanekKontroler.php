@@ -10,24 +10,16 @@ class ClanekKontroler extends Kontroler
         $this->data['admin'] = $uzivatel && $uzivatel['admin'];
         if((!empty($parametry[1])) && ($parametry[1] == 'odstranit'))
         {
-            $this->overUzivatele(true);
             $spravceClanku->odstranClanek($parametry[0]);
-            $this->pridejZpravu('Članek byl uspěšně odstraněn');
-            $this->presmeruj('clanek');
-        }
-        else if((!empty($parametry[1])) && ($parametry[1] == 'publikuj'))
-        {
-            $this->overUzivatele(true);
-            $spravceClanku->publikuj($parametry[0]);
-            $this->pridejZpravu('Članek byl uspěšně publikovan');
-            $this->presmeruj();
+            $spravceClanku->odstranRecenze($parametry[0]);
+            $this->smeruj('clanek');
         }
         else if (!empty($parametry[0]))
         {
             $clanek = $spravceClanku->vratClanek($parametry[0]);
             if (!$clanek)
             {
-                $this->presmeruj('chyba');
+                $this->smeruj('chyba');
             }
             $this->hlavicka = array(
                 'titulek' => $clanek['titulek'],
@@ -37,6 +29,7 @@ class ClanekKontroler extends Kontroler
 
             $this->data['titulek'] = $clanek['titulek'];
             $this->data['obsah'] = $clanek['obsah'];
+            $this->data['soubor'] = $clanek['soubor_cesta'];
 
             $this->pohled = 'clanek';
         }
@@ -48,9 +41,15 @@ class ClanekKontroler extends Kontroler
         }
         else if ((isset($_SESSION['uzivatel']))&&($_SESSION['uzivatel']['recenzent']))
         {
-            $clanky = $spravceClanku->vratClanky();
+            $clanky = $spravceClanku->vractClankyRecenze();
             $this->data['clanky'] = $clanky;
             $this->pohled = 'clankyrecenzent';
+        }
+        else if ((isset($_SESSION['uzivatel']))&&(!$_SESSION['uzivatel']['recenzent'])&&(!$_SESSION['uzivatel']['admin']))
+        {
+            $clanky = $spravceClanku->autorClanky();
+            $this->data['clanky'] = $clanky;
+            $this->pohled = 'clankyautor';
         }
         else
         {
