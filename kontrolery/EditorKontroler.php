@@ -32,7 +32,7 @@ class EditorKontroler extends Kontroler
             $soubor_cesta = $soubor_cesta . basename( $_FILES['soubor']['name']);
             move_uploaded_file($_FILES['soubor']['tmp_name'], $soubor_cesta);
 
-            $spravceClanku->ulozClanek($clanek_id,$titulek, $obsah, $url, $popisek,$klicova_slova, $targetfolder);
+            $spravceClanku->ulozClanek($clanek_id,$titulek, $obsah, $url, $popisek,$klicova_slova, $soubor_cesta);
             $this->smeruj('clanek');
         }
         else if (!empty($parametry[0]))
