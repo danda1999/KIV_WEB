@@ -28,3 +28,7 @@ main
 {
     color:red;
 }
+.detail_clanku p
+{
+    word-break: break-all;
+}

@@ -1,20 +1,23 @@
 <?php
+/**
+* @author Daniel Cífka
+* @version 2021-1-9
+* Toto je hlavní kontroler pro trasovaní mého MVC modelu
+* Ze získané url se převede na název kontroleru, který je tak zavolán a jeho funkcionalita se vykoná
+*/
 class SmerovacKontroler extends Kontroler
 {
-    protected $kontroler;
+    protected $kontroler; // proměná pro získaný kontroler
 
+    /**
+     * @param parametry argumenty v url adrese za nazvem kontroler
+     */
     public function zpracuj($parametry)
     {
-        $_SESSION['administrator'] = '/administrace';
-        $_SESSION['home_page'] = '/uvod';
-        $_SESSION['home_page2'] = 'localhost/administrace';
-        $_SESSION['seznam_clanky'] = '/clanek';
-        $_SESSION['kontaktovani'] = '/kontakt';
-        $_SESSION['prihlaseni'] = '/prihlaseni';
 
-        $naparsovanaURL = $this->parsujURL($parametry[0]);
-        $rawUrl = parse_url($parametry[0]);
-        if(isset($rawUrl['query']))
+        $naparsovanaURL = $this->parsujURL($parametry[0]); // získam zadanou rul
+        $rawUrl = parse_url($parametry[0]); //naparsovanou url načtu do proměnný
+        if(isset($rawUrl['query'])) //zjistím zdali existuje
         {
             $query = $rawUrl['query'];
             //rozděluji query od cesty
@@ -71,10 +74,16 @@ class SmerovacKontroler extends Kontroler
         }
         $this->kontroler->zpracuj($naparsovanaURL);
 
-
+        /**
+         * ze ziskaneho kontroler získá data do hlavičky a ty vloží jako sovje data se kteráma lze pak pracovat
+         * 
+         */
         $this->data['titulek'] = $this->kontroler->hlavicka['titulek'];
         $this->data['popis'] = $this->kontroler->hlavicka['popis'];
         $this->data['klicova_slova'] = $this->kontroler->hlavicka['klicova_slova'];
+        /**
+         * zde podle toho zdali je uživatel přihlášen a jeho pozice se načte do pohledu jeho návrh
+         */
         if(isset($_SESSION['uzivatel'])&&($_SESSION['uzivatel']['admin']))
         {
             $this->pohled = 'navrhadmin';
@@ -93,8 +102,15 @@ class SmerovacKontroler extends Kontroler
         }
     }
 
+    /**
+     * zde máme získáváme potřebnou url z prohlžeče
+     * @param url načtená url
+     */
     private function parsujURL($url)
     {
+        /**
+         * načteme podle lomítek rozdělíme na části a vratíme zpět
+         */
         $naparsovanaURL = parse_url($url);
         $naparsovanaURL["path"] = ltrim($naparsovanaURL["path"], "/");
         $naparsovanaURL["path"] = trim($naparsovanaURL["path"]);
@@ -104,7 +120,10 @@ class SmerovacKontroler extends Kontroler
     
         return $rozdelenaCesta;
     }
-
+    /**
+     * funkce pouze předělává textovou podobu pohledu na nazev kontroler bez přípon, která je přidaná později
+     * @param text rozdělená url
+     */
     private function notace($text)
     {
         $veta = str_replace('-', ' ', $text);
@@ -112,7 +131,7 @@ class SmerovacKontroler extends Kontroler
         $veta = ucwords($veta);
         $veta = str_replace(' ', '', $veta);
 
-        return $veta;
+        return $veta; // hotový název vracíme
     }
 }
 ?>

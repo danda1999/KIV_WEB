@@ -1,6 +1,17 @@
 <header>
     <h1><?= $titulek ?></h1>
 </header>
-<section>
-<?= $_obsah?><br><a href="/<?= $soubor?>" target="_blank">stahnout</a>
+<section class ="detail_clanku">
+<?= $_obsah?><br><?php if($soubor !='clankypdf/'): ?><button id="btn_clanek_dl" class=" btn btn-primary">Otevřít</button>
+    <script>
+        jQuery(document).ready(function($){
+        url = 'clanek';
+        $("#btn_clanek_dl").click(function(e){
+            e.preventDefault();
+            window.open('/<?= $soubor ?>');
+            window.location = url;
+        });
+        });
+    </script>
+<?php endif ?>
 </section>

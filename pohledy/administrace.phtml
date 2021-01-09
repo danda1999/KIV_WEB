@@ -1,1 +1,15 @@
-<p>Vítejte v redakci, jste přihlášeni jako <?= $login ?> autor článků</p>
+<p>Vítejte v redakci, jste přihlášeni jako <?= $uzivatel['login'] ?> autor článků</p>
+<div class="table-responsive-md">
+    <table class="table table-striped">
+        <thead>
+            <tr>
+                <th>Jmeno</th><th>Příjmení</th> <th>Email</th><th>Heslo</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td><?= $uzivatel['jmeno'] ?></td><td><?= $uzivatel['prijmeni'] ?></td><td><?= $uzivatel['email'] ?></td><td><a href="zmenahesla"><button type="button" class="btn btn-primary">Nové Heslo</button></a></td>
+            </tr>
+        </tbody>
+    </table>
+</div>

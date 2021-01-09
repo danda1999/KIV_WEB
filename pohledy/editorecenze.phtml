@@ -1,17 +1,17 @@
 <h1>Recenze Článku</h1>
 
 <form method="post">
-    Titulek<br />
-    <input type="text" class="text-center" name="titulek" value="<?= $recenze['titulek'] ?>" readonly/><br /><br>
-    URL<br />
-    <input type="text" class="text-center" name="url" value="<?= $recenze['url'] ?>" readonly/><br /><br>
-    Hodnoceni_zajímavosti<br><br>
-    <input type="number" name="zajimavost" min="1" max="10"/><br><br>
-    Hodnoceni_pravdivost<br><br>
-    <input type="number" name="pravdivost" min="1" max="10"/><br><br>
-    Hodnoceni_gramatika<br><br>
-    <input type="number" name="gramatika" min="1" max="10"/><br><br>
-    Hodnoceni<br><br>
-    <input type="number" name="hodnoceni" min="1" max="10"/><br><br>
-    <input type="submit" value="Uložit recenzi" />
+    <label for="Titulek" class="d-block">Titulek</label>
+    <input type="text" class="col-auto mb-4" id="Titulek" class="text-center" name="titulek" value="<?= $recenze['titulek'] ?>" readonly/>
+    <label for="URL" class="d-block">URL</label>
+    <input type="text" class="col-auto mb-4" id="URL" class="text-center" name="url" value="<?= $recenze['url'] ?>" readonly/>
+    <label for="Zajimavost" class="d-block">Zajímavost</label>
+    <input type="number" class="col-auto mb-4" id="Zajimavost" name="zajimavost" min="1" max="10"/>
+    <label for="Pravdivost" class="d-block">Pravdivost</label>
+    <input type="number" class="col-auto mb-4" id="Pravdivost" name="pravdivost" min="1" max="10"/>
+    <label for="Gramatika" class="d-block">Gramatika</label>
+    <input type="number" class="col-auto mb-4" id="Gramatika" name="gramatika" min="1" max="10"/>
+    <label for="Hodnoceni" class="d-block">Hodnocení</label>
+    <input type="number" class="col-auto mb-4" id="Hodnoceni" name="hodnoceni" min="1" max="10"/>
+    <input type="submit" class="btn btn-primary d-block mx-auto" value="Uložit Recenzi" name="submit"/>
 </form>

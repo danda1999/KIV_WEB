@@ -1,23 +1,31 @@
 <h1>Seznam článků</h1>
 <div class="table-responsive-md">
     <table class="table table-striped">
-        <tr>
-            <th>Článek</th><th>publikovaný/nepublikovaný</th>
-        </tr>
+        <thead>
+            <tr>
+                <th>Článek</th><th>publikovaný/nepublikovaný</th>
+            </tr>
+        </thead>
+        <tbody>
         <?php foreach ($clanky as $clanek) : ?>
-        <tr>
-            <td>
-                <h2><a href="clanek/<?= $clanek['url'] ?>"><?=$clanek['titulek'] ?></a></h2>
-                <p><?= $clanek['popisek'] ?></p>
-                
-                <p><a class="odsazeni" href="editor/<?= $clanek['url'] ?>"><button type="button" class="btn btn-primary">Editor</button></a>
-                <a class="odsazeni" href="clanek/<?= $clanek['url'] ?>/odstranit"><button type="button" class="btn btn-primary">Odstranit</button></a></p>
-            </td>
-            <td style="padding-top:50px;">
-                <?php if($clanek['publikovani']) {echo("publikovano"); ?>
-                <?php } else{ echo("nepublikovano");} ?>
-            </td>
-        </tr>
-    <?php endforeach ?>
+            <tr>
+                <td>
+                    <h2><a href="clanek/<?= $clanek['url'] ?>"><?=$clanek['titulek'] ?></a></h2>
+                    <p><?= $clanek['popisek'] ?></p>
+                    <div class="d-grid gap-2">
+                    <a class="odsazeni" href="editor/<?= $clanek['url'] ?>"><button class="btn btn-primary" type="button">Editor</button></a>
+                    <?php if(!$clanek['publikovani']) { ?>
+                    <a class="odsazeni" href="recenze/<?= $clanek['url'] ?>"><button class="btn btn-primary" type="button">Recenze</button></a>
+                    <?php } ?>
+                    <a class="odsazeni" href="clanek/<?= $clanek['url'] ?>/odstranit"><button class="btn btn-primary" type="button">Odstranit</button></a>
+                    </div>
+                </td>
+                <td style="padding-top:50px;">
+                    <?php if($clanek['publikovani']) {echo("publikovano"); ?>
+                    <?php } else{ echo("nepublikovano");} ?>
+                </td>
+            </tr>
+        <?php endforeach ?>
+        </tbody>
     </table>
 </div>

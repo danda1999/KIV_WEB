@@ -1,21 +1,26 @@
 <h1>Seznam uživatelů</h1>
 <table class="table table-striped">
-
+<thead>
     <tr>
-        <th>Login</th><th>Jméno</th><th>Příjmení</th><th>Email</th><th>Oprávnění</th><th>odstranit</th>
+        <th>Login</th><th>Jméno</th><th>Příjmení</th><th>Email</th><th>Oprávnění</th><th>Změna Práva<th>odstranit</th>
     </tr>
+    <thead>
+    <tbody>
     <?php foreach ($uzivatele as $uzivatel) : ?>
     <tr>
         <td><?=$uzivatel['login'] ?></td>
         <td><?=$uzivatel['jmeno'] ?></td>
         <td><?=$uzivatel['prijmeni'] ?></td>
         <td><?=$uzivatel['email'] ?></td>
-        <td><?php if($uzivatel['admin']){
-            echo("Administrátor");
-        } else if($uzivatel['recenzent']){
+        <td><?php if($uzivatel['recenzent']){
             echo("Recenzent");
         } else { echo("autor");} ?></td>
+        <td><?php if($uzivatel['recenzent']){ ?>
+            <a class="odsazeni" href="seznamuzivatelu/<?= $uzivatel['uzivatel_id'] ?>/autor"><button type="button" class="btn btn-primary">Autor</button></a>
+        <?php } else { ?><a class="odsazeni" href="seznamuzivatelu/<?= $uzivatel['uzivatel_id'] ?>/recenzent"><button type="button" class="btn btn-primary">Receneznt</button></a>
+        <?php } ?></td>
         <td><a class="odsazeni" href="seznamuzivatelu/<?= $uzivatel['uzivatel_id'] ?>/odstranit"><button type="button" class="btn btn-primary">Odstranit</button></a></td>
     </tr>
 <?php endforeach ?>
+<tb>
 </table>

@@ -1,4 +1,10 @@
 <?php
+/**
+ * @author Daniel Cífka
+ * @version 2021-1-9
+ * Tento model je pouze prostřední mezi kontrolerem a modelem pro komunikaci s databzí a jeho hlavní účelem je zpřehlednit
+ * pozdější hledaní oprav v modelu přímé komunikace s databází
+ */
 class SpravceUzivatelu
 {
     public function vratOtisk($heslo)
@@ -29,14 +35,10 @@ class SpravceUzivatelu
 
     public function prihlas($login, $heslo)
     {
-        $uzivatel = Db::dotazJeden('
-            SELECT login, admin, heslo, recenzent
-            FROM uzivatel
-            WHERE login = ?
-        ', array($login));
+        $uzivatel = Db::vratUzivatelInfo($login);
         if (!$uzivatel || !password_verify($heslo, $uzivatel['heslo']))
         {
-            throw new ChybaUzivatele('Neplatné jméno nebo heslo.');
+            
         }
         else
         {
@@ -64,6 +66,19 @@ class SpravceUzivatelu
     public function uzivatele()
     {
         return DB::vratUzivateleSeznam($_SESSION['uzivatel']['login']);
+    }
+    public function zmenaHesla($noveHeslo)
+    {
+        DB::zmeneneHeslo($this->vratOtisk($noveHeslo));
+    }
+
+    public function opravneniRecenzent($id)
+    {
+        DB::recenzent($id);
+    }
+    public function opravneniAutor($id)
+    {
+        DB::autor($id);
     }
 }
 ?>

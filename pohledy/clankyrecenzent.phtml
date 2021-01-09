@@ -1,15 +1,22 @@
 <h1>Seznam článků</h1>
 <div class="table-responsive-md">
     <table class="table table-striped">
-    <?php foreach ($clanky as $clanek) : ?>
-        <tr>
-            <td>
-                <h2><a href="clanek/<?= $clanek['url'] ?>"><?= $clanek['titulek'] ?></a></h2>
-                <?= $clanek['popisek'] ?>
-                    <br />
-                    <a href="editorecenze/<?= $clanek['url'] ?>">Hodnotit</a>
-            </td>
-        </tr>
-    <?php endforeach ?>
+        <thead>
+            <tr>
+                <th>Článek</th>
+            </tr>
+        </thead>
+        <tbody>
+        <?php foreach ($clanky as $clanek) : ?>
+            <tr>
+                <td>
+                    <h2><a href="clanek/<?= $clanek['url'] ?>"><?= $clanek['titulek'] ?></a></h2>
+                    <?= $clanek['popisek'] ?>
+                        <br />
+                        <a href="editorecenze/<?= $clanek['url'] ?>">Hodnotit</a>
+                </td>
+            </tr>
+        <?php endforeach ?>
+        </tbody>
     </table>
 </div>

@@ -1,20 +1,21 @@
 <h1>Editor článků</h1>
 
 <form method="post" enctype="multipart/form-data">
-    <input type="hidden" name="clanky_id" value="<?= $clanek['clanky_id'] ?>" />
-    Titulek<br />
-    <input type="text" name="titulek" value="<?= $clanek['titulek'] ?>" /><br />
-    URL<br />
-    <input type="text" name="url" value="<?= $clanek['url'] ?>" /><br />
-    Popisek<br />
-    <input type="text" name="popisek" value="<?= $clanek['popisek'] ?>" /><br />
-    Klíčová slova<br />
-    <input type="text" name="klicova_slova" value="<?= $clanek['klicova_slova'] ?>" /><br />
-    Soubor pdf <br>
-    <input type="file" accept=".pdf" name="soubor" id="soubor"><br>
-    Obsah
-    <textarea name="obsah"><?= $clanek['obsah'] ?></textarea><br>
-    <input type="submit" value="Uložit článek" name="submit" />
+    <input type="hidden" name="clanky_id" value="<?= $clanek['clanky_id'] ?>" required/>
+    <label for="Titulek" class="d-block">Titulek</label>
+    <input type="text" class="col-auto mb-4" id="Tituelk" name="titulek" value="<?= $clanek['titulek'] ?>" required/>
+    <label for="URL" class="d-block">URL (Uložen v databázi)</label><label for="URL" class="d-block">Bez diakritiky</label>
+    <input type="text" class="col-auto mb-4" id="URL" name="url" value="<?= $clanek['url'] ?>" required/>
+    <label for="Popisek" class="d-block">Popisek</label>
+    <input type="text" class="col-auto mb-4" id="Popisek" name="popisek" value="<?= $clanek['popisek'] ?>" required/>
+    <label for="Klicova_Slova" class="d-block">Klicova_Slova</label>
+    <input type="text" class="col-auto mb-4" id="Klicova_Slova" name="klicova_slova" value="<?= $clanek['klicova_slova'] ?>" required/>
+    <?php if($clanek['titulek'] == ''){ ?>
+    <label for="soubor" class="d-block">Soubor</label>
+    <input type="file" class="col-auto mb-4" accept=".pdf" name="soubor" id="soubor"><br> <?php } else {} ?>
+    <label for="Obsah" class="d-block">Obsah:</label>
+    <textarea name="obsah" class="col-auto mb-4" id ="Obsah" required><?= $clanek['obsah'] ?></textarea></br>
+    <input type="submit" class="btn btn-primary d-block mx-auto" value="Uložit článek" name="submit" />
 </form>
 
 <script src="https://cdn.ckeditor.com/ckeditor5/24.0.0/decoupled-document/ckeditor.js"></script>

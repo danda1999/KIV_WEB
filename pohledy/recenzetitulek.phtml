@@ -1,38 +1,44 @@
-<?php foreach ($recenze as $hodnoceni) : ?>
-<h1>Seznam recenzí <?= $hodnoceni['titulek'] ?></h1>
-<?php endforeach ?>
+<h1>Seznam recenzí <?=$nadpis ?></h1> 
+<?php if(count($recenze) != 0) { ?>
 <div class="table-responsive-md">
     <table class="table table-striped">
-        <tr>
-            <th>titulek</th><th>hodnocení_celkové</th><th>hodnocení_zajímavost</th><th>hodnocení_pravdivost</th>
-            <th>hodnocení_gramatika</th><th>autor</th><th>datum</th>
-        </tr>
-        <?php foreach ($recenze as $hodnoceni) : ?>
-        <tr>
-            <td>
-                <?= $hodnoceni['titulek'] ?>
-            </td>
-            <td>
-                <?= $hodnoceni['hodnoceni'] ?>
-            </td>
-            <td>
-                <?= $hodnoceni['hodnoceni_zajimavost'] ?>
-            </td>
-            <td>
-                <?= $hodnoceni['hodnoceni_pravdivost'] ?>
-            </td>
-            <td>
-                <?= $hodnoceni['hodnoceni_gramatika'] ?>
-            </td>
-            <td>
-                <?= $hodnoceni['autor'] ?>
-            </td>
-            <td>
-                <?= $hodnoceni['datum'] ?>
-            </td>
-        </tr>
-    <?php endforeach ?>
+        <thead>
+            <tr>
+                <th>titulek</th><th>hodnocení_celkové</th><th>hodnocení_zajímavost</th><th>hodnocení_pravdivost</th>
+                <th>hodnocení_gramatika</th><th>autor</th><th>datum</th>
+            </tr>
+        </thead>
+        <tbody>
+            <?php foreach ($recenze as $hodnoceni) : ?>
+            <tr>
+                <td>
+                    <?= $hodnoceni['titulek'] ?>
+                </td>
+                <td>
+                    <?= $hodnoceni['hodnoceni'] ?>
+                </td>
+                <td>
+                    <?= $hodnoceni['hodnoceni_zajimavost'] ?>
+                </td>
+                <td>
+                    <?= $hodnoceni['hodnoceni_pravdivost'] ?>
+                </td>
+                <td>
+                    <?= $hodnoceni['hodnoceni_gramatika'] ?>
+                </td>
+                <td>
+                    <?= $hodnoceni['autor'] ?>
+                </td>
+                <td>
+                    <?= $hodnoceni['datum'] ?>
+                </td>
+            </tr>
+            <?php endforeach ?>
+        </tbody>
     </table>
 </div>
 
 <a href="recenze/<?= $hodnoceni['url'] ?>/publikuj"><button type="button" class="btn btn-primary">Publikuj</button></a>
+<?php } else { ?>
+   <h1>Zatím nebylo recenzenty ohodnoceno </h1>
+<?php } ?>
